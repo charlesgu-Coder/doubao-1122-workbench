@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-28 02:02",
+  "updatedAt": "2026-11-28 02:07",
   "main": "运行中 · 8 worker 闭环",
   "capNote": "框架最多同时跑 5 路（实测），按 8 / 6 / 4 人阶段分批",
   "currentTask": {
@@ -156,7 +156,7 @@
   ],
   "redAlert": {
     "level": "红灯",
-    "time": "2026-11-28T02:01:10+08:00",
+    "time": "2026-11-28T02:07:10+08:00",
     "overall": "FAIL",
     "responsibility": "主控",
     "items": [],
