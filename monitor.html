@@ -18,23 +18,48 @@
   .hd .t{font-size:15px;font-weight:700;flex:1 1 auto}
   .hd .u{font-size:12px;opacity:.92;flex:0 0 auto;text-align:right}
   .sec-t{padding:13px 16px 6px;font-size:13px;font-weight:800;color:#07a35a}
+  .note{font-size:11px;color:#8a978f;padding:2px 16px 13px}
+
+  /* 排队任务 */
+  .qitem{display:flex;gap:10px;padding:11px 16px;border-top:1px solid #eef1ef}
+  .qitem:first-of-type{border-top:none}
+  .qnum{width:20px;height:20px;border-radius:50%;background:#eef4f0;color:#07a35a;font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center;flex:0 0 auto;margin-top:1px}
+  .qbody{flex:1 1 auto;min-width:0}
+  .qtop{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+  .qtitle{font-size:14px;font-weight:700}
+  .badge{font-size:11px;font-weight:700;padding:2px 8px;border-radius:9px;flex:0 0 auto}
+  .badge.on{background:#e3f6ec;color:#07a35a}
+  .badge.off{background:#eef1ef;color:#6b7770}
+  .qstep{font-size:12px;color:#5a6b60;margin-top:2px}
+
+  /* 助理列表 */
   .a{display:flex;align-items:flex-start;gap:10px;padding:10px 16px;border-top:1px solid #eef1ef}
+  .a .num{width:20px;height:20px;border-radius:50%;background:#07a35a;color:#fff;font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center;flex:0 0 auto;margin-top:1px}
   .a .s{width:9px;height:9px;border-radius:50%;margin-top:5px;flex:0 0 auto}
   .a .s.run{background:#0bbf6b}.a .s.wait{background:#b9c4bd}
   .a .n{font-size:14px;font-weight:700}
   .a .d{font-size:12px;color:#5a6b60;margin-top:1px}
-  ol.q{padding:4px 16px 14px 32px}
-  ol.q li{font-size:13px;margin:8px 0}
-  .note{font-size:11px;color:#8a978f;padding:2px 16px 13px}
+
+  /* 空闲去向 */
+  .stage{padding:11px 16px;border-top:1px solid #eef1ef}
+  .stage:first-of-type{border-top:none}
+  .stage-h{font-size:13px;font-weight:800;color:#1c2b22}
+  .stage-flow{font-size:12px;color:#5a6b60;margin:3px 0 6px}
+  .idle-row{display:flex;gap:8px;align-items:flex-start;padding:4px 0}
+  .who{flex:0 0 auto;font-size:12px;font-weight:700;color:#07a35a;background:#eef4f0;border-radius:7px;padding:2px 7px}
+  .arrow{flex:0 0 auto;color:#9aa79f;font-size:12px}
+  .task{font-size:12px;color:#1c2b22}
+  .idle-none{font-size:12px;color:#8a978f;padding:2px 0}
 
   /* 平板 / 电脑端：宽屏居中、两栏并排 */
   @media (min-width:768px){
     .wrap{max-width:1040px;grid-template-columns:3fr 2fr;grid-auto-rows:min-content;align-items:start}
-    .card.top{grid-column:1 / -1}
+    .card.top,.card.block1{grid-column:1 / -1}
     .hd{padding:16px 22px}.hd .t{font-size:17px}
     .sec-t{font-size:14px;padding:16px 22px 8px}
+    .qitem{padding:12px 22px}.qtitle{font-size:15px}.qstep{font-size:13px}
     .a{padding:12px 22px}.a .n{font-size:15px}.a .d{font-size:13px}
-    ol.q{padding:6px 22px 18px 38px}ol.q li{font-size:14px;margin:10px 0}
+    .stage{padding:12px 22px}
     .note{padding:4px 22px 16px}
   }
 </style>
@@ -44,42 +69,89 @@
     <div class="card top">
       <div class="hd live" id="hd"><span class="dot"></span><span class="t" id="main">连接中…</span><span class="u" id="upd"></span></div>
     </div>
-    <div class="card">
-      <div class="sec-t">助理在干嘛</div>
+
+    <div class="card block1">
+      <div class="sec-t">一、排队任务（按顺序）</div>
+      <div id="queue"></div>
+    </div>
+
+    <div class="card block2">
+      <div class="sec-t">二、8 个助理在干嘛</div>
       <div id="assistants"></div>
       <div class="note" id="cap"></div>
     </div>
-    <div class="card">
-      <div class="sec-t">排队任务</div>
-      <ol class="q" id="queue"></ol>
+
+    <div class="card block3">
+      <div class="sec-t">三、各阶段空闲助理去向</div>
+      <div id="idle"></div>
     </div>
   </div>
 <script>
 // 心跳超过这个分钟数没更新，就判定为“已停止/等待心跳”
 var STALE_MINUTES = 6;
+var STAGE_ORDER = ['8人阶段', '6人阶段', '4人阶段'];
 
 function esc(s){return String(s==null?"":s).replace(/[&<>]/g,function(c){return{"&":"&amp;","<":"&lt;","&gt;":"&gt;"}[c];});}
 
-// 解析 "yyyy-MM-dd HH:mm" 为浏览器本地时间
 function parseLocal(str){
   if(!str) return null;
   var m=String(str).trim().match(/^(\d{4})-(\d{2})-(\d{2})[ T](\d{2}):(\d{2})/);
   if(!m) return null;
   return new Date(+m[1],+m[2]-1,+m[3],+m[4],+m[5],0);
 }
-
 function ageText(min){
   if(min < 1) return "刚刚";
   if(min < 60) return Math.floor(min)+" 分钟前";
   var h=Math.floor(min/60), mm=Math.floor(min%60);
   return h+" 小时 "+mm+" 分钟前";
 }
-
 function setStatus(alive, mainText, updateText){
   var hd=document.getElementById("hd");
   hd.className = alive ? "hd live" : "hd stale";
   document.getElementById("main").textContent = mainText;
   document.getElementById("upd").textContent = updateText;
+}
+
+function renderQueue(list){
+  var h="";
+  (list||[]).forEach(function(q,i){
+    var on = (q.status==="进行中"||q.status==="运行");
+    var badge = '<span class="badge '+(on?"on":"off")+'">'+esc(q.status||"排队")+'</span>';
+    h+='<div class="qitem"><span class="qnum">'+(i+1)+'</span><div class="qbody"><div class="qtop"><span class="qtitle">'+esc(q.title)+'</span>'+badge+'</div><div class="qstep">'+esc(q.currentStep||"")+'</div></div></div>';
+  });
+  document.getElementById("queue").innerHTML=h;
+}
+
+function renderAssistants(list){
+  var h="";
+  (list||[]).forEach(function(a,i){
+    var run = (a.state==="运行"||a.state==="运行中"||a.state==="进行中");
+    h+='<div class="a"><span class="num">'+(i+1)+'</span><span class="s '+(run?"run":"wait")+'"></span><div><div class="n">'+esc(a.name)+' · '+esc(a.state||"待命")+'</div><div class="d">'+esc(a.doing)+'</div></div></div>';
+  });
+  document.getElementById("assistants").innerHTML=h;
+}
+
+function renderIdle(idle){
+  if(!idle){document.getElementById("idle").innerHTML="";return;}
+  var h="";
+  STAGE_ORDER.forEach(function(stage){
+    var s=idle[stage];
+    if(!s) return;
+    h+='<div class="stage"><div class="stage-h">'+esc(stage)+'</div>';
+    if(s.mainFlow) h+='<div class="stage-flow">'+esc(s.mainFlow)+'</div>';
+    var arr=s.idle||[];
+    if(arr.length===1 && typeof arr[0]==="string"){
+      h+='<div class="idle-none">'+esc(arr[0])+'</div>';
+    } else {
+      arr.forEach(function(x){
+        if(x && typeof x==="object"){
+          h+='<div class="idle-row"><span class="who">'+esc(x.who)+'</span><span class="arrow">→</span><span class="task">'+esc(x.task)+'</span></div>';
+        }
+      });
+    }
+    h+='</div>';
+  });
+  document.getElementById("idle").innerHTML=h;
 }
 
 function load(){
@@ -91,22 +163,15 @@ function load(){
       var ageMin=t ? (now-t)/60000 : Infinity;
 
       if(!t || ageMin > STALE_MINUTES){
-        // 心跳落后：明确标成已停止，不再显示“运行中”
         setStatus(false, "已停止 · 等待心跳", t ? ("最后更新 "+d.updatedAt+"（"+ageText(ageMin)+"）") : "未读到更新时间");
       } else {
         setStatus(true, d.main || "运行中", "最后更新 "+d.updatedAt+"（"+ageText(ageMin)+"）");
       }
 
       document.getElementById("cap").textContent=d.capNote||"";
-      var ah="";
-      (d.assistants||[]).forEach(function(a){
-        var cls=(a.status==="运行"||a.status==="运行中")?"run":"wait";
-        ah+="<div class='a'><span class='s "+cls+"'></span><div><div class='n'>"+esc(a.name)+" · "+esc(a.status)+"</div><div class='d'>"+esc(a.doing)+"</div></div></div>";
-      });
-      document.getElementById("assistants").innerHTML=ah;
-      var qh="";
-      (d.queue||[]).forEach(function(x){qh+="<li>"+esc(x)+"</li>";});
-      document.getElementById("queue").innerHTML=qh;
+      renderQueue(d.queue);
+      renderAssistants(d.assistants);
+      renderIdle(d.idle);
     })
     .catch(function(){
       setStatus(false, "等待心跳（连不上数据）", "");
