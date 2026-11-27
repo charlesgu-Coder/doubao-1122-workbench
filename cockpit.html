@@ -17,7 +17,7 @@
   #ck-fab .ck-dot { width:14px; height:14px; border-radius:50%; background:#fff; animation:ckPulse 1.6s infinite; }
   @keyframes ckPulse { 0%{box-shadow:0 0 0 0 rgba(255,255,255,.7)} 70%{box-shadow:0 0 0 13px rgba(255,255,255,0)} 100%{box-shadow:0 0 0 0 rgba(255,255,255,0)} }
 
-  #ck-panel { position:fixed; right:18px; top:11vh; width:320px; max-width:calc(100vw - 32px);
+  #ck-panel { position:fixed; left:50%; transform:translateX(-50%); top:14vh; width:320px; max-width:calc(100vw - 32px);
     max-height:62vh; overflow:auto; z-index:2147483600; background:#fff; border-radius:16px; box-shadow:0 12px 38px rgba(0,0,0,.24);
     display:none; flex-direction:column; }
   #ck-panel.open { display:flex; }
@@ -34,7 +34,7 @@
   #ck-actions a, #ck-actions button { flex:1; text-align:center; padding:9px 6px; border-radius:9px; background:#f2f2f2; color:#07c160;
     text-decoration:none; font-weight:600; font-size:12px; border:none; cursor:pointer; }
   #ck-err { color:#e64340; font-size:11px; padding:6px 0; }
-  @media (max-width:480px){ #ck-fab{right:14px} #ck-panel{right:14px} }
+  @media (max-width:480px){ #ck-fab{right:14px} }
 </style>
 </head>
 <body>
