@@ -1,9 +1,73 @@
 {
-  "package": "D:\\豆包记忆\\豆包镜像流水线\\产出\\发布包_豆包版",
+  "package": "D:\\豆包记忆\\豆包镜像流水线\\产出\\脚本_闭环\\..\\发布包_豆包版",
   "files": {
     "index.html": {
-      "bytes": 1646942,
-      "md5": "75cb7905acddc9fcc8bc44b22ec7d558"
+      "bytes": 1646961,
+      "md5": "0a3458bbefcdeebf3f59f3dbd6f28aa2"
+    },
+    "index.html.bak_div平衡修复前_20261127_1340": {
+      "bytes": 1651380,
+      "md5": "8ecee1a5e4445e5adb49fd022e356d06"
+    },
+    "index.html.bak_M13成本利润修复前_20261127_1325": {
+      "bytes": 1651380,
+      "md5": "009297e47da4139210d458f3d7420b0e"
+    },
+    "index.html.bak_欠款KPI修复前_20261127_1310": {
+      "bytes": 1650711,
+      "md5": "dfb0507e6b5c18c6863740d9dac5c6ab"
+    },
+    "monitor.html": {
+      "bytes": 13133,
+      "md5": "b8d7211fd5ff4ff63c5a47227528eacd"
+    },
+    "monitor.html.bak-20261127-1415": {
+      "bytes": 5126,
+      "md5": "e17520dc339d67d1a2abe2b75f48d56d"
+    },
+    "monitor.html.bak-20261127-1425": {
+      "bytes": 8046,
+      "md5": "4f0f713467f3fd8ceb22050401242b16"
+    },
+    "monitor.html.bak-20261127-1433": {
+      "bytes": 9514,
+      "md5": "a31fe0f9acb1fe8e566c718ae16acbef"
+    },
+    "monitor.json": {
+      "bytes": 8316,
+      "md5": "b29389a85845e7740df43d29e887634a"
+    },
+    "monitor.json.bak-20261127-1415": {
+      "bytes": 1338,
+      "md5": "7b9260ef354185e5632e3a84464bfafc"
+    },
+    "monitor.json.bak-20261127-1425": {
+      "bytes": 2648,
+      "md5": "63683a611f43a37ead9675ca647bb0b0"
+    },
+    "monitor.json.bak-20261127-1433": {
+      "bytes": 2893,
+      "md5": "46ab056f022b377e905453d7845c3fe1"
+    },
+    "monitor.json.bak-20261127-1530": {
+      "bytes": 4899,
+      "md5": "462455de3edf1a2a7109c9c27659cc99"
+    },
+    "monitor.prev.json": {
+      "bytes": 4857,
+      "md5": "1a7b59d4bd694a6279edb83865c9eb92"
+    },
+    "progress-widget.js": {
+      "bytes": 7658,
+      "md5": "99a8ecb4344b93d7f038d970a4bb0724"
+    },
+    "progress.json": {
+      "bytes": 2745,
+      "md5": "1ed04d7b91cde38ffb21de1b06ff4770"
+    },
+    "发布清单.json": {
+      "bytes": 3220,
+      "md5": "00e4469d352559b7b94eb573e2276413"
     },
     "吴丹_镜像.html": {
       "bytes": 3211939,
@@ -14,6 +78,10 @@
       "md5": "ae9bd2caef30a5050227813f16121f49"
     },
     "data\\state_snapshot.json": {
+      "bytes": 32839,
+      "md5": "e9efdbac18416f2e6883fb370c2ffa29"
+    },
+    "data\\state_snapshot.json.bak_归档956修复前_20261127_1310": {
       "bytes": 32858,
       "md5": "7c0c436eb32b3ae27a1a112c0f258fe3"
     },
@@ -30,10 +98,16 @@
       "md5": "ca6f996a77bed3329f15da6661e5f03e"
     },
     "data\\账单表.json": {
-      "bytes": 33499,
-      "md5": "9c40426965fe936745ca1b28270fa52c"
+      "bytes": 33518,
+      "md5": "e89abf46ca30bfbc2733e5b4884d38a3"
     }
   },
-  "data_files": [],
+  "data_files": [
+    "state_snapshot.json",
+    "账单表.json",
+    "休息表.json",
+    "请假表.json",
+    "状态版本.json"
+  ],
   "fails": []
 }
