@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>主控台 · 1122（工作台 + 实时进度）</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html,body { height:100%; width:100%; overflow:hidden; font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif; background:#f2f3f5; }
+  /* 工作台占满整个壳，看板浮在壳这一层（父页面），iframe 内任何脚本都无法移除 */
+  #wb-frame { position:fixed; inset:0; width:100%; height:100%; border:0; background:#fff; }
+
+  /* ===== 悬浮球 + 面板（独立于 iframe，天然最高层） ===== */
+  #ck-fab { position:fixed; right:18px; bottom:calc(18px + env(safe-area-inset-bottom)); width:56px; height:56px; border-radius:50%;
+    border:none; cursor:pointer; z-index:2147483600; background:linear-gradient(135deg,#07c160,#0a9c50); color:#fff;
+    box-shadow:0 6px 18px rgba(0,0,0,.28); display:flex; align-items:center; justify-content:center; }
+  #ck-fab .ck-dot { width:14px; height:14px; border-radius:50%; background:#fff; animation:ckPulse 1.6s infinite; }
+  @keyframes ckPulse { 0%{box-shadow:0 0 0 0 rgba(255,255,255,.7)} 70%{box-shadow:0 0 0 13px rgba(255,255,255,0)} 100%{box-shadow:0 0 0 0 rgba(255,255,255,0)} }
+
+  #ck-panel { position:fixed; right:18px; bottom:calc(84px + env(safe-area-inset-bottom)); width:320px; max-width:calc(100vw - 32px);
+    max-height:72vh; overflow:auto; z-index:2147483600; background:#fff; border-radius:16px; box-shadow:0 12px 38px rgba(0,0,0,.24);
+    display:none; flex-direction:column; }
+  #ck-panel.open { display:flex; }
+  #ck-head { padding:14px 16px; background:#07c160; color:#fff; border-radius:16px 16px 0 0; }
+  #ck-head .ck-t { font-weight:700; font-size:15px; display:flex; align-items:center; gap:8px; }
+  #ck-head .ck-u { font-size:11px; opacity:.9; margin-top:4px; line-height:1.5; }
+  #ck-body { padding:10px 16px 16px; font-size:12px; color:#333; }
+  #ck-body h4 { margin:12px 0 6px; font-size:12px; color:#07c160; }
+  #ck-body .ck-row { padding:6px 0; border-bottom:1px dashed #eee; }
+  #ck-body .ck-row b { display:block; font-size:12px; }
+  #ck-body .ck-row span { color:#777; font-size:11px; line-height:1.5; }
+  #ck-body .ck-q { padding:4px 0; color:#555; line-height:1.5; }
+  #ck-actions { display:flex; gap:8px; margin-top:12px; }
+  #ck-actions a, #ck-actions button { flex:1; text-align:center; padding:9px 6px; border-radius:9px; background:#f2f2f2; color:#07c160;
+    text-decoration:none; font-weight:600; font-size:12px; border:none; cursor:pointer; }
+  #ck-err { color:#e64340; font-size:11px; padding:6px 0; }
+  @media (max-width:480px){ #ck-fab{right:14px} #ck-panel{right:14px} }
+</style>
+</head>
+<body>
+  <!-- 真正的工作台：无论它被哪个脚本重新生成/同步，这里始终加载最新版，看板不受影响 -->
+  <iframe id="wb-frame" src="index.html" title="1122 工作台"></iframe>
+
+  <button id="ck-fab" type="button" title="主控实时进度"><span class="ck-dot"></span></button>
+  <div id="ck-panel">
+    <div id="ck-head">
+      <div class="ck-t">🛡️ 主控台 <span id="ck-main" style="font-weight:500;font-size:12px"></span></div>
+      <div class="ck-u" id="ck-updated"></div>
+    </div>
+    <div id="ck-body">
+      <div id="ck-err" style="display:none"></div>
+      <div id="ck-content">加载中…</div>
+      <div id="ck-actions">
+        <a href="monitor.html" target="_blank" rel="noopener">完整看板</a>
+        <button type="button" id="ck-reload">刷新工作台</button>
+      </div>
+    </div>
+  </div>
+
+<script>
+(function(){
+  var fab=document.getElementById('ck-fab'), panel=document.getElementById('ck-panel');
+  fab.addEventListener('click',function(){ panel.classList.toggle('open'); });
+  document.getElementById('ck-reload').addEventListener('click',function(){
+    document.getElementById('wb-frame').src='index.html?_='+Date.now();
+  });
+  function esc(s){ return String(s==null?'':s).replace(/[&<>"]/g,function(c){
+    return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
+  function render(d){
+    document.getElementById('ck-main').textContent=d.main||'';
+    document.getElementById('ck-updated').textContent='最后更新 '+(d.updatedAt||'')+(d.capNote?' · '+d.capNote:'');
+    var h='';
+    if(d.assistants&&d.assistants.length){
+      h+='<h4>助理在干嘛</h4>';
+      d.assistants.slice(0,6).forEach(function(a){
+        h+='<div class="ck-row"><b>'+esc(a.name)+' · '+esc(a.status)+'</b><span>'+esc(a.doing)+'</span></div>'; });
+    }
+    if(d.queue&&d.queue.length){
+      h+='<h4>排队任务</h4>';
+      d.queue.forEach(function(q){ h+='<div class="ck-q">· '+esc(q)+'</div>'; });
+    }
+    document.getElementById('ck-content').innerHTML=h||'暂无数据';
+  }
+  function load(){
+    fetch('monitor.json?_='+Date.now()).then(function(r){ if(!r.ok)throw new Error('HTTP '+r.status); return r.json(); })
+      .then(function(d){ document.getElementById('ck-err').style.display='none'; render(d); })
+      .catch(function(e){
+        var er=document.getElementById('ck-err'); er.style.display='block';
+        er.textContent='实时数据暂时拉不到（'+e.message+'），可点"完整看板"'; });
+  }
+  load(); setInterval(load,20000);
+})();
+</script>
+</body>
+</html>
