@@ -2,6 +2,10 @@
   "package": "D:\\豆包记忆\\豆包镜像流水线\\产出\\脚本_闭环\\..\\发布包_豆包版",
   "files": {
     "index.html": {
+      "bytes": 1652930,
+      "md5": "c98a49fc383253bd16c4a77e5f9ca7c5"
+    },
+    "index.html.bak-20261127-1659": {
       "bytes": 1646961,
       "md5": "0a3458bbefcdeebf3f59f3dbd6f28aa2"
     },
@@ -12,6 +16,14 @@
     "index.html.bak_M13成本利润修复前_20261127_1325": {
       "bytes": 1651380,
       "md5": "009297e47da4139210d458f3d7420b0e"
+    },
+    "index.html.bak_主控熔断补丁_20261127_170823": {
+      "bytes": 1646961,
+      "md5": "0a3458bbefcdeebf3f59f3dbd6f28aa2"
+    },
+    "index.html.bak_主控熔断补丁_20261127_170905": {
+      "bytes": 1632258,
+      "md5": "6bd6504e43596129f9ee283871c86657"
     },
     "index.html.bak_欠款KPI修复前_20261127_1310": {
       "bytes": 1650711,
@@ -34,8 +46,8 @@
       "md5": "a31fe0f9acb1fe8e566c718ae16acbef"
     },
     "monitor.json": {
-      "bytes": 8278,
-      "md5": "3e8b3fbb309321684ced07cc86367890"
+      "bytes": 5877,
+      "md5": "3bb2804998365badb0a8786dc4685095"
     },
     "monitor.json.bak-20261127-1415": {
       "bytes": 1338,
@@ -54,8 +66,8 @@
       "md5": "462455de3edf1a2a7109c9c27659cc99"
     },
     "monitor.prev.json": {
-      "bytes": 4819,
-      "md5": "8b68f547bd2369c26418405cfb2fa21d"
+      "bytes": 4825,
+      "md5": "b0614b4f39cb146b62234f432d84cb09"
     },
     "progress-widget.js": {
       "bytes": 7658,
@@ -66,18 +78,22 @@
       "md5": "1ed04d7b91cde38ffb21de1b06ff4770"
     },
     "发布清单.json": {
-      "bytes": 3221,
-      "md5": "2249fbb8ce42065f3a5eef1ed34e2df3"
+      "bytes": 4039,
+      "md5": "b0de68eccc7cd2469ee2b80745cf1b52"
     },
     "吴丹_镜像.html": {
-      "bytes": 3211939,
-      "md5": "f7e97540346066b609452de28379ddff"
+      "bytes": 2920791,
+      "md5": "c6b9845dd0403fe07f85ba9f6d46eab3"
     },
     "方方_镜像.html": {
-      "bytes": 3511809,
-      "md5": "ae9bd2caef30a5050227813f16121f49"
+      "bytes": 3194050,
+      "md5": "709a0df7507484e9f11303f0af55a17b"
     },
     "data\\state_snapshot.json": {
+      "bytes": 33870,
+      "md5": "ae0f5c26e6004f6f2d6973c46e1cd3fc"
+    },
+    "data\\state_snapshot.json.bak-20261127-1659": {
       "bytes": 32839,
       "md5": "e9efdbac18416f2e6883fb370c2ffa29"
     },
@@ -98,6 +114,14 @@
       "md5": "ca6f996a77bed3329f15da6661e5f03e"
     },
     "data\\账单表.json": {
+      "bytes": 33525,
+      "md5": "88c19d5185c2b795ba5fbb32d323902c"
+    },
+    "data\\账单表.json.bak-20261127-1659": {
+      "bytes": 33518,
+      "md5": "e89abf46ca30bfbc2733e5b4884d38a3"
+    },
+    "data\\账单表.json.bak_主控熔断补丁_20261127_170906": {
       "bytes": 33518,
       "md5": "e89abf46ca30bfbc2733e5b4884d38a3"
     }
