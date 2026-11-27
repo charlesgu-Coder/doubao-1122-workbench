@@ -156,7 +156,7 @@
   ],
   "redAlert": {
     "level": "红灯",
-    "time": "2026-11-28T07:11:05+08:00",
+    "time": "2026-11-28T07:15:06+08:00",
     "overall": "FAIL",
     "responsibility": "主控",
     "items": [],
