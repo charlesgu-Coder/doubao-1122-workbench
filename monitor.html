@@ -193,13 +193,39 @@ function renderQueue(list){
   document.getElementById("queue").innerHTML=h;
 }
 
+function renderAlert(unhealthy){
+  var card=document.getElementById("alertCard");
+  if(!unhealthy||!unhealthy.length){card.style.display="none";return;}
+  var order={stuck:0,stalled:1,lagging:2};
+  unhealthy.sort(function(x,y){return order[x.health]-order[y.health];});
+  var hasStuck=unhealthy.some(function(x){return x.health==="stuck";});
+  document.getElementById("alertIn").className="alert-in"+(hasStuck?"":" warn");
+  var parts=unhealthy.map(function(x){
+    var hp=HEALTH_MAP[x.health]||HEALTH_MAP.normal;
+    return esc(x.name)+" "+hp.label;
+  });
+  document.getElementById("alertText").textContent="需关注："+parts.join("；");
+  document.getElementById("alertSub").textContent="演示数据，正式跑由闭环脚本按前后快照实时刷新判定";
+  card.style.display="";
+}
+
 function renderAssistants(list){
-  var h="";
+  var h="", unhealthy=[];
   (list||[]).forEach(function(a,i){
-    var run = (a.state==="运行"||a.state==="运行中"||a.state==="进行中");
-    h+='<div class="a"><span class="num">'+(i+1)+'</span><span class="s '+(run?"run":"wait")+'"></span><div><div class="n">'+esc(a.name)+' · '+esc(a.state||"待命")+'</div><div class="d">'+esc(a.doing)+'</div></div></div>';
+    var hp=HEALTH_MAP[a.health]||HEALTH_MAP.normal;
+    var pct=Math.max(0,Math.min(100,Number(a.percent)||0));
+    var run=(a.state==="运行"||a.state==="运行中"||a.state==="进行中");
+    if(a.health && a.health!=="normal"){ unhealthy.push({name:a.name, health:a.health, note:a.healthNote||""}); }
+    h+='<div class="a"><span class="num">'+(i+1)+'</span><span class="s '+(run?"run":"wait")+'"></span>'
+      +'<div class="body"><div class="nrow"><span class="n">'+esc(a.name)+' · '+esc(a.state||"待命")+'</span>'
+      +'<span class="badge '+hp.cls+'">'+hp.label+'</span></div>'
+      +'<div class="mini"><div class="mini-fill '+hp.fill+'" style="width:'+pct+'%"></div></div>'
+      +'<div class="meta">'+pct+'% · 已运行 '+fmtElapsed(a.elapsedSec)+' · '+minuteOf(a.lastUpdate)+' 更新</div>'
+      +(a.healthNote?'<div class="anote">'+esc(a.healthNote)+'</div>':'')
+      +'<div class="d">'+esc(a.doing)+'</div></div></div>';
   });
   document.getElementById("assistants").innerHTML=h;
+  renderAlert(unhealthy);
 }
 
 function renderIdle(idle){
