@@ -17,8 +17,8 @@
   #ck-fab .ck-dot { width:14px; height:14px; border-radius:50%; background:#fff; animation:ckPulse 1.6s infinite; }
   @keyframes ckPulse { 0%{box-shadow:0 0 0 0 rgba(255,255,255,.7)} 70%{box-shadow:0 0 0 13px rgba(255,255,255,0)} 100%{box-shadow:0 0 0 0 rgba(255,255,255,0)} }
 
-  #ck-panel { position:fixed; right:18px; bottom:calc(84px + env(safe-area-inset-bottom)); width:320px; max-width:calc(100vw - 32px);
-    max-height:72vh; overflow:auto; z-index:2147483600; background:#fff; border-radius:16px; box-shadow:0 12px 38px rgba(0,0,0,.24);
+  #ck-panel { position:fixed; right:18px; top:11vh; width:320px; max-width:calc(100vw - 32px);
+    max-height:62vh; overflow:auto; z-index:2147483600; background:#fff; border-radius:16px; box-shadow:0 12px 38px rgba(0,0,0,.24);
     display:none; flex-direction:column; }
   #ck-panel.open { display:flex; }
   #ck-head { padding:14px 16px; background:#07c160; color:#fff; border-radius:16px 16px 0 0; }
@@ -42,7 +42,7 @@
   <iframe id="wb-frame" src="index.html" title="1122 工作台"></iframe>
 
   <button id="ck-fab" type="button" title="主控实时进度"><span class="ck-dot"></span></button>
-  <div id="ck-panel">
+  <div id="ck-panel" class="open">
     <div id="ck-head">
       <div class="ck-t">🛡️ 主控台 <span id="ck-main" style="font-weight:500;font-size:12px"></span></div>
       <div class="ck-u" id="ck-updated"></div>
