@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-28 05:37",
+  "updatedAt": "2026-11-28 05:42",
   "main": "运行中 · 8 worker 闭环",
   "capNote": "框架最多同时跑 5 路（实测），按 8 / 6 / 4 人阶段分批",
   "currentTask": {
@@ -156,11 +156,16 @@
   ],
   "redAlert": {
     "level": "红灯",
-    "time": "2026-11-28T05:37:07+08:00",
+    "time": "2026-11-28T05:41:05+08:00",
     "overall": "FAIL",
     "responsibility": "主控",
     "items": [],
     "failed_checks": [
+      {
+        "id": "C1",
+        "name": "开工必读核验",
+        "status": "FAIL"
+      },
       {
         "id": "C6",
         "name": "写操作审计核验",
