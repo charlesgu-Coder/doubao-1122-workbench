@@ -365,8 +365,9 @@ body{font-family:"PingFang SC","Microsoft YaHei","Noto Sans CJK SC",sans-serif;b
    <div class="kpis">
      <div class="kpi"><div class="n">全天收款（含运费）</div><div class="v">¥48,990</div></div>
      <div class="kpi"><div class="n">八种方式实收</div><div class="v">¥43,665</div></div>
-     <div class="kpi"><div class="n">未收款</div><div class="v">¥902</div></div>
+     <div class="kpi"><div class="n">未收款</div><div class="v">¥5,325</div></div>
    </div>
+   <div class="lbl">未收款 ¥5,325 ＝ 全天收款 ¥48,990 − 八种方式实收 ¥43,665；其中<b>真实未付 ¥5,194</b>（彭雪616 ＋ 黄晓清155 ＋ 谷朋屿4,423），另含已付忘改状态的<b>黄黄 ¥131</b>（王明松47 已实际付清54，一并说明）。</div>
    <div class="lbl">两线核对（截单表合计 = 收款金额）</div>
    <div class="row"><span>顾超线（鑫浦商行）</span><span class="money">商品 ¥25,487 ＋ 运费 ¥188 ＝ <b>¥25,675</b> · 差 0</span></div>
    <div class="row"><span>吴丹线（mr韩）</span><span class="money">商品 ¥23,171 ＋ 运费 ¥144 ＝ <b>¥23,315</b> · 差 0</span></div>
@@ -387,13 +388,15 @@ body{font-family:"PingFang SC","Microsoft YaHei","Noto Sans CJK SC",sans-serif;b
 
  <!-- 模块2 谁欠我钱 -->
  <div class="card">
-  <h3><span class="ic">!</span>2 · 谁欠我钱 <span class="tag">待确认欠款 ¥771</span><span class="tag">归档(往来已付) 0 条</span></h3>
-  <div class="m4-lead"><b>显示规则（新起点口径 · 2026-11-27 顾超令）：</b>22号是新体系最初开始日，与 21/20/19 号无任何关联；待欠款列表<b>只显示当日未结清的待确认欠款</b>。<b>归档区（往来已付 / 非欠款类正常付款）按新起点口径整区清空 0 条（母版唯一错误，有意不同）</b>，不再在归档区保留已付往来记录。<b>归属锚点＝账单生成日</b>（本块均归 11.22），<b>不随实际到账时间跨天变动</b>。</div>
-  <div class="lbl">当日待确认欠款（仅这些计入合计 · 正常付款已剔除）</div>
-  <div class="row" data-month="2026-11"><span class="who"><span class="date">11.22号</span> 彭雪 <span class="note">滚雪球 2616−2000（同 trf_tid 去重）；23号19:57已付（616+2406=3022）</span></span><span class="money">¥616</span></div>
-  <div class="row" data-month="2026-11"><span class="who"><span class="date">11.22号</span> 黄晓清 <span class="note">口头说付不算，未到账；23号21:48已随1,057付清（=155+902）</span></span><span class="money">¥155</span></div>
-  <div class="row" data-month="2026-11"><span class="who"><span class="date">11.22号</span> 谷朋屿 <span class="note">23号18:49已随¥12,639卡付清(=4,423+8,216)</span></span><span class="money">¥4,423</span></div>
-  <div class="row total" data-month="2026-11"><span>待确认欠款合计（按当日实际保留）</span><span class="money">¥771</span></div>
+  <h3><span class="ic">!</span>2 · 谁欠我钱 <span class="tag">当日待确认欠款 ¥771</span><span class="tag">真实未付合计 ¥5,194</span><span class="tag">归档(往来已付) 0 条</span></h3>
+  <div class="m4-lead"><b>口径区分（2026-11-27 顾超令）：</b><b>当日待确认欠款 ¥771</b>＝彭雪616 ＋ 黄晓清155，仅这两笔计入当日合计；<b>真实未付合计 ¥5,194</b>＝616 ＋ 155 ＋ 谷朋屿4,423；<b>未收款 KPI ¥5,325</b>＝48,990 − 43,665，另含已付忘改状态的黄黄131（王明松47 已实际付清54，一并说明）。谷朋屿4,423 真欠但属跨天挂账、次日付清，<b>不计入当日 ¥771</b>。<b>归档区按新起点口径整区清空 0 条</b>；归属锚点＝账单生成日，不随到账跨天变动。</div>
+  <div class="lbl">① 当日待确认欠款（计入合计 ¥771）</div>
+  <div class="row" data-month="2026-11"><span class="who"><span class="date">11.22号</span> 彭雪 <span class="note">真欠 · 滚雪球 2616−2000（同 trf_tid 去重）</span></span><span class="money">¥616</span></div>
+  <div class="row" data-month="2026-11"><span class="who"><span class="date">11.22号</span> 黄晓清 <span class="note">真欠 · 口头说付不算，未到账</span></span><span class="money">¥155</span></div>
+  <div class="row total" data-month="2026-11"><span>当日待确认欠款合计（仅 616 ＋ 155）</span><span class="money">¥771</span></div>
+  <div class="lbl">② 跨天挂账（次日付清 · 不计入当日 ¥771）</div>
+  <div class="row" data-month="2026-11"><span class="who"><span class="date">11.22号</span> 谷朋屿 <span class="note">真欠 · 跨天挂账；23号18:49 已随¥12,639卡付清（=4,423+8,216），次日付清不计入当日 ¥771</span></span><span class="money">¥4,423</span></div>
+  <div class="lbl">③ 口径别混：¥771＝当日待确认（616+155）；¥5,194＝真实未付合计（616+155+4,423）；¥5,325＝未收款KPI（48,990−43,665，含已付忘改131）</div>
   <div class="lbl">✅ 归档区（往来已付 / 非欠款类正常付款）· 按 22 号新起点口径整区清空 0 条（母版唯一错误，有意不同）；当天真实未结清欠款见上方欠款区</div>
 <div class="arch-list" data-month="2026-11"><!-- m2补录插入点_1122 · 归档区按新起点口径清空（母版唯一错误，有意不同） --><details class="arch-card"><summary><span class="ac-ic">▣</span><span class="ac-amt">0 条</span><span class="ac-who">如实空</span><span class="ac-cat">11.22 为新体系最初开始日 · 归档(往来已付/非欠款正常付款) 0 条 · 母版唯一错误，有意不同</span></summary><div class="ac-body"><div><b>付款时间：</b>—（新起点口径，与 21/20/19 号无任何关联，当日无往来已付记录）</div><div><b>金额：</b>—（归档区 0 条，不计入欠款统计）</div><div><b>对方账户：</b>—（无已付记录即无对方账户）</div><div><b>凭据 / 搜索法：</b>按 22 号新起点口径整区清空；待确认欠款按实际保留在上方欠款区。</div></div></details></div>  <div class="tags">
     <span class="tag">新起点口径：归档区 0 条，待确认欠款 ¥771 按实际保留</span>
@@ -968,13 +971,13 @@ body{font-family:"PingFang SC","Microsoft YaHei","Noto Sans CJK SC",sans-serif;b
         <b>今天两销售截单额（含运费）</b> − <b>每个产品成本</b> − <b>上月固定成本 ÷ 本月上班天数</b>
       </div>
       <div class="m13-row"><span>今日截单额含运费（模块1全天收款）</span><span>¥48,990</span></div>
-      <div class="m13-row"><span>− 今日产品成本（按截单产品×进价）</span><span style="color:#c0392b">¥47,328.50</span></div>
+      <div class="m13-row"><span>− 今日产品成本（按截单产品×进价）</span><span style="color:#c0392b">¥46,856.50</span></div>
       <div class="m13-row"><span id="m13DailyFormula">− 日摊固定成本 98,144 ÷ ？ 天（读取中）</span><span id="m13DailyValue">读取中</span></div>
-      <div class="m13-result pre"><span>今日预估利润（粗估）</span><span class="big" id="m13ResultDaily">−¥1,973.46（预估）</span></div>
+      <div class="m13-result pre"><span>今日预估利润（粗估）</span><span class="big" id="m13ResultDaily">−¥1,501.46（预估）</span></div>
       <div class="m13-formula" style="background:#fffaf0;border-color:#f0d9a0;color:#7a5a1f">
-        <b>历史原型（系统跑过的一天）：</b>今天赚了 656.67 ＝ 卖货毛利 3,472.10 ＋ 运费代收 655.00 − 日摊固定成本 3,470.43。<br>其中毛利＝当日销售额−<b>已卖成本</b>，已卖成本＝卖出数量×进价（<b>不是当天进货全量</b>，没卖完的是压库）。原型日摊3,470.43是旧成本÷旧天数；本块现在按同一份 <code>休息表.json</code> 实时重算开工天数和日摊，休息日一改，台面自动跟着变。<br><b>22号实算（2026-11-24 补齐 · E44 新口径复核）：</b>今日产品成本 <b>¥47,328.50</b> ＝ 截单表 135 个可比商品的 Σ(进价×数量)，其中精确匹配66项／采购单包含57项／兜底12项；未匹配0项（b17东北哥 TF细长管 1*115 已词序归一命中自采结算进价105，故含105元）。证据＝<code>22号售后成本_取证.json</code>，算法＝<code>_cost_calc_1122.py</code>（与20/23号同口径）。
+        <b>历史原型（系统跑过的一天）：</b>今天赚了 656.67 ＝ 卖货毛利 3,472.10 ＋ 运费代收 655.00 − 日摊固定成本 3,470.43。<br>其中毛利＝当日销售额−<b>已卖成本</b>，已卖成本＝卖出数量×进价（<b>不是当天进货全量</b>，没卖完的是压库）。原型日摊3,470.43是旧成本÷旧天数；本块现在按同一份 <code>休息表.json</code> 实时重算开工天数和日摊，休息日一改，台面自动跟着变。<br><b>22号实算（2026-11-24 补齐 · E44 新口径复核）：</b>今日产品成本 <b>¥46,856.50</b> ＝ 截单表 135 个可比商品的 Σ(进价×数量)，其中精确匹配66项／采购单包含57项／兜底12项；未匹配0项（b17东北哥 TF细长管 1*115 已词序归一命中自采结算进价105，故含105元）。证据＝<code>22号售后成本_取证.json</code>，算法＝<code>_cost_calc_1122.py</code>（与20/23号同口径）。
       </div>
-      <div class="m13-warn">⚠ 顾超明确：这个<b>不是准确的，只是预估当天</b>。"产品成本"＝<b>当天已卖成本</b>（卖出去的量×进价），现成数在利润表"已卖成本"字段／分号利润表，靠截单表＋成本库每天现算；<b>模块8亏损核对不是成本源</b>（它只标售价低于成本的品）。22号已按当天采购表/常顾采购单/价格表实算，来源见上；缺数仍标"待补"、绝不编数。<br><b style="color:#c0392b">为什么今天是负数？</b>本块按顾超定的公式诚实直算：48,990（当天两销售截单额含运费）− 47,328.50（当天已卖产品成本）− 3,634.96（日摊固定成本）＝ −1,973.46。负数是"当天卖货毛利不够覆盖当天摊到的固定成本"的正常结果，<b>不是算错、不是漏填、不许改数凑正</b>；上月口径（右栏）才是月末数齐后的真实定稿。未匹配1行（b17东北哥 TF细长管 1*115，自采结算进价105）已词序归一补进，未匹配归零。</div>
+      <div class="m13-warn">⚠ 顾超明确：这个<b>不是准确的，只是预估当天</b>。"产品成本"＝<b>当天已卖成本</b>（卖出去的量×进价），现成数在利润表"已卖成本"字段／分号利润表，靠截单表＋成本库每天现算；<b>模块8亏损核对不是成本源</b>（它只标售价低于成本的品）。22号已按当天采购表/常顾采购单/价格表实算，来源见上；缺数仍标"待补"、绝不编数。<br><b style="color:#c0392b">为什么今天是负数？</b>本块按顾超定的公式诚实直算：48,990（当天两销售截单额含运费）− 46,856.50（当天已卖产品成本）− 3,634.96（日摊固定成本）＝ −1,501.46。负数是"当天卖货毛利不够覆盖当天摊到的固定成本"的正常结果，<b>不是算错、不是漏填、不许改数凑正</b>；上月口径（右栏）才是月末数齐后的真实定稿。未匹配1行（b17东北哥 TF细长管 1*115，自采结算进价105）已词序归一补进，未匹配归零。</div>
     </div>
 
     <!-- 栏② 上月利润最真实 -->
@@ -1129,7 +1132,7 @@ body{font-family:"PingFang SC","Microsoft YaHei","Noto Sans CJK SC",sans-serif;b
   // 模块13日摊：与模块14同源，直接读 restData（来自 休息表.json），不再写死 27 天/3,634.96
   // 22号已卖成本（来自 22号售后成本_取证.json / _cost_calc_1122.py，2026-11-24 补齐）
   var M13_SALES_1122 = 48990.00;      // 模块1：两销售截单额含运费
-  var M13_SOLD_COST_1122 = 47328.50;  // 截单表135个可比商品 Σ(进价×数量)
+  var M13_SOLD_COST_1122 = 46856.50;  // 截单表135个可比商品 Σ(进价×数量)
   var M13_FIXED_1122 = 98144.00;      // 上月固定成本（与模块14同源）
   function updateM13(){
     var f=document.getElementById('m13DailyFormula'), v=document.getElementById('m13DailyValue'), r=document.getElementById('m13ResultDaily');
@@ -2071,7 +2074,7 @@ body{font-family:"PingFang SC","Microsoft YaHei","Noto Sans CJK SC",sans-serif;b
   // 模块13日摊：与模块14同源，直接读 restData（来自 休息表.json），不再写死 27 天/3,634.96
   // 22号已卖成本（来自 22号售后成本_取证.json / _cost_calc_1122.py，2026-11-24 补齐）
   var M13_SALES_1122 = 48990.00;      // 模块1：两销售截单额含运费
-  var M13_SOLD_COST_1122 = 47328.50;  // 截单表135个可比商品 Σ(进价×数量)
+  var M13_SOLD_COST_1122 = 46856.50;  // 截单表135个可比商品 Σ(进价×数量)
   var M13_FIXED_1122 = 98144.00;      // 上月固定成本（与模块14同源）
   function updateM13(){
     var f=document.getElementById('m13DailyFormula'), v=document.getElementById('m13DailyValue'), r=document.getElementById('m13ResultDaily');
@@ -3012,7 +3015,7 @@ body{font-family:"PingFang SC","Microsoft YaHei","Noto Sans CJK SC",sans-serif;b
   // 模块13日摊：与模块14同源，直接读 restData（来自 休息表.json），不再写死 27 天/3,634.96
   // 22号已卖成本（来自 22号售后成本_取证.json / _cost_calc_1122.py，2026-11-24 补齐）
   var M13_SALES_1122 = 48990.00;      // 模块1：两销售截单额含运费
-  var M13_SOLD_COST_1122 = 47328.50;  // 截单表135个可比商品 Σ(进价×数量)
+  var M13_SOLD_COST_1122 = 46856.50;  // 截单表135个可比商品 Σ(进价×数量)
   var M13_FIXED_1122 = 98144.00;      // 上月固定成本（与模块14同源）
   function updateM13(){
     var f=document.getElementById('m13DailyFormula'), v=document.getElementById('m13DailyValue'), r=document.getElementById('m13ResultDaily');
@@ -3952,7 +3955,7 @@ body{font-family:"PingFang SC","Microsoft YaHei","Noto Sans CJK SC",sans-serif;b
   // 模块13日摊：与模块14同源，直接读 restData（来自 休息表.json），不再写死 27 天/3,634.96
   // 22号已卖成本（来自 22号售后成本_取证.json / _cost_calc_1122.py，2026-11-24 补齐）
   var M13_SALES_1122 = 48990.00;      // 模块1：两销售截单额含运费
-  var M13_SOLD_COST_1122 = 47328.50;  // 截单表135个可比商品 Σ(进价×数量)
+  var M13_SOLD_COST_1122 = 46856.50;  // 截单表135个可比商品 Σ(进价×数量)
   var M13_FIXED_1122 = 98144.00;      // 上月固定成本（与模块14同源）
   function updateM13(){
     var f=document.getElementById('m13DailyFormula'), v=document.getElementById('m13DailyValue'), r=document.getElementById('m13ResultDaily');
@@ -4894,7 +4897,7 @@ body{font-family:"PingFang SC","Microsoft YaHei","Noto Sans CJK SC",sans-serif;b
   // 模块13日摊：与模块14同源，直接读 restData（来自 休息表.json），不再写死 27 天/3,634.96
   // 22号已卖成本（来自 22号售后成本_取证.json / _cost_calc_1122.py，2026-11-24 补齐）
   var M13_SALES_1122 = 48990.00;      // 模块1：两销售截单额含运费
-  var M13_SOLD_COST_1122 = 47328.50;  // 截单表135个可比商品 Σ(进价×数量)
+  var M13_SOLD_COST_1122 = 46856.50;  // 截单表135个可比商品 Σ(进价×数量)
   var M13_FIXED_1122 = 98144.00;      // 上月固定成本（与模块14同源）
   function updateM13(){
     var f=document.getElementById('m13DailyFormula'), v=document.getElementById('m13DailyValue'), r=document.getElementById('m13ResultDaily');
@@ -5835,7 +5838,7 @@ body{font-family:"PingFang SC","Microsoft YaHei","Noto Sans CJK SC",sans-serif;b
   // 模块13日摊：与模块14同源，直接读 restData（来自 休息表.json），不再写死 27 天/3,634.96
   // 22号已卖成本（来自 22号售后成本_取证.json / _cost_calc_1122.py，2026-11-24 补齐）
   var M13_SALES_1122 = 48990.00;      // 模块1：两销售截单额含运费
-  var M13_SOLD_COST_1122 = 47328.50;  // 截单表135个可比商品 Σ(进价×数量)
+  var M13_SOLD_COST_1122 = 46856.50;  // 截单表135个可比商品 Σ(进价×数量)
   var M13_FIXED_1122 = 98144.00;      // 上月固定成本（与模块14同源）
   function updateM13(){
     var f=document.getElementById('m13DailyFormula'), v=document.getElementById('m13DailyValue'), r=document.getElementById('m13ResultDaily');
@@ -6750,7 +6753,7 @@ body{font-family:"PingFang SC","Microsoft YaHei","Noto Sans CJK SC",sans-serif;b
   // 模块13日摊：与模块14同源，直接读 restData（来自 休息表.json），不再写死 27 天/3,634.96
   // 22号已卖成本（来自 22号售后成本_取证.json / _cost_calc_1122.py，2026-11-24 补齐）
   var M13_SALES_1122 = 48990.00;      // 模块1：两销售截单额含运费
-  var M13_SOLD_COST_1122 = 47328.50;  // 截单表135个可比商品 Σ(进价×数量)
+  var M13_SOLD_COST_1122 = 46856.50;  // 截单表135个可比商品 Σ(进价×数量)
   var M13_FIXED_1122 = 98144.00;      // 上月固定成本（与模块14同源）
   function updateM13(){
     var f=document.getElementById('m13DailyFormula'), v=document.getElementById('m13DailyValue'), r=document.getElementById('m13ResultDaily');
@@ -7693,7 +7696,7 @@ body{font-family:"PingFang SC","Microsoft YaHei","Noto Sans CJK SC",sans-serif;b
   // 模块13日摊：与模块14同源，直接读 restData（来自 休息表.json），不再写死 27 天/3,634.96
   // 22号已卖成本（来自 22号售后成本_取证.json / _cost_calc_1122.py，2026-11-24 补齐）
   var M13_SALES_1122 = 48990.00;      // 模块1：两销售截单额含运费
-  var M13_SOLD_COST_1122 = 47328.50;  // 截单表135个可比商品 Σ(进价×数量)
+  var M13_SOLD_COST_1122 = 46856.50;  // 截单表135个可比商品 Σ(进价×数量)
   var M13_FIXED_1122 = 98144.00;      // 上月固定成本（与模块14同源）
   function updateM13(){
     var f=document.getElementById('m13DailyFormula'), v=document.getElementById('m13DailyValue'), r=document.getElementById('m13ResultDaily');
@@ -8634,7 +8637,7 @@ body{font-family:"PingFang SC","Microsoft YaHei","Noto Sans CJK SC",sans-serif;b
   // 模块13日摊：与模块14同源，直接读 restData（来自 休息表.json），不再写死 27 天/3,634.96
   // 22号已卖成本（来自 22号售后成本_取证.json / _cost_calc_1122.py，2026-11-24 补齐）
   var M13_SALES_1122 = 48990.00;      // 模块1：两销售截单额含运费
-  var M13_SOLD_COST_1122 = 47328.50;  // 截单表135个可比商品 Σ(进价×数量)
+  var M13_SOLD_COST_1122 = 46856.50;  // 截单表135个可比商品 Σ(进价×数量)
   var M13_FIXED_1122 = 98144.00;      // 上月固定成本（与模块14同源）
   function updateM13(){
     var f=document.getElementById('m13DailyFormula'), v=document.getElementById('m13DailyValue'), r=document.getElementById('m13ResultDaily');
@@ -9574,7 +9577,7 @@ body{font-family:"PingFang SC","Microsoft YaHei","Noto Sans CJK SC",sans-serif;b
   // 模块13日摊：与模块14同源，直接读 restData（来自 休息表.json），不再写死 27 天/3,634.96
   // 22号已卖成本（来自 22号售后成本_取证.json / _cost_calc_1122.py，2026-11-24 补齐）
   var M13_SALES_1122 = 48990.00;      // 模块1：两销售截单额含运费
-  var M13_SOLD_COST_1122 = 47328.50;  // 截单表135个可比商品 Σ(进价×数量)
+  var M13_SOLD_COST_1122 = 46856.50;  // 截单表135个可比商品 Σ(进价×数量)
   var M13_FIXED_1122 = 98144.00;      // 上月固定成本（与模块14同源）
   function updateM13(){
     var f=document.getElementById('m13DailyFormula'), v=document.getElementById('m13DailyValue'), r=document.getElementById('m13ResultDaily');
@@ -10518,7 +10521,7 @@ body{font-family:"PingFang SC","Microsoft YaHei","Noto Sans CJK SC",sans-serif;b
   // 模块13日摊：与模块14同源，直接读 restData（来自 休息表.json），不再写死 27 天/3,634.96
   // 22号已卖成本（来自 22号售后成本_取证.json / _cost_calc_1122.py，2026-11-24 补齐）
   var M13_SALES_1122 = 48990.00;      // 模块1：两销售截单额含运费
-  var M13_SOLD_COST_1122 = 47328.50;  // 截单表135个可比商品 Σ(进价×数量)
+  var M13_SOLD_COST_1122 = 46856.50;  // 截单表135个可比商品 Σ(进价×数量)
   var M13_FIXED_1122 = 98144.00;      // 上月固定成本（与模块14同源）
   function updateM13(){
     var f=document.getElementById('m13DailyFormula'), v=document.getElementById('m13DailyValue'), r=document.getElementById('m13ResultDaily');
@@ -11468,7 +11471,7 @@ body{font-family:"PingFang SC","Microsoft YaHei","Noto Sans CJK SC",sans-serif;b
   // 模块13日摊：与模块14同源，直接读 restData（来自 休息表.json），不再写死 27 天/3,634.96
   // 22号已卖成本（来自 22号售后成本_取证.json / _cost_calc_1122.py，2026-11-24 补齐）
   var M13_SALES_1122 = 48990.00;      // 模块1：两销售截单额含运费
-  var M13_SOLD_COST_1122 = 47328.50;  // 截单表135个可比商品 Σ(进价×数量)
+  var M13_SOLD_COST_1122 = 46856.50;  // 截单表135个可比商品 Σ(进价×数量)
   var M13_FIXED_1122 = 98144.00;      // 上月固定成本（与模块14同源）
   function updateM13(){
     var f=document.getElementById('m13DailyFormula'), v=document.getElementById('m13DailyValue'), r=document.getElementById('m13ResultDaily');
@@ -12416,7 +12419,7 @@ body{font-family:"PingFang SC","Microsoft YaHei","Noto Sans CJK SC",sans-serif;b
   // 模块13日摊：与模块14同源，直接读 restData（来自 休息表.json），不再写死 27 天/3,634.96
   // 22号已卖成本（来自 22号售后成本_取证.json / _cost_calc_1122.py，2026-11-24 补齐）
   var M13_SALES_1122 = 48990.00;      // 模块1：两销售截单额含运费
-  var M13_SOLD_COST_1122 = 47328.50;  // 截单表135个可比商品 Σ(进价×数量)
+  var M13_SOLD_COST_1122 = 46856.50;  // 截单表135个可比商品 Σ(进价×数量)
   var M13_FIXED_1122 = 98144.00;      // 上月固定成本（与模块14同源）
   function updateM13(){
     var f=document.getElementById('m13DailyFormula'), v=document.getElementById('m13DailyValue'), r=document.getElementById('m13ResultDaily');
@@ -13853,7 +13856,7 @@ body{font-family:"PingFang SC","Microsoft YaHei","Noto Sans CJK SC",sans-serif;b
   // 模块13日摊：与模块14同源，直接读 restData（来自 休息表.json），不再写死 27 天/3,634.96
   // 22号已卖成本（来自 22号售后成本_取证.json / _cost_calc_1122.py，2026-11-24 补齐）
   var M13_SALES_1122 = 48990.00;      // 模块1：两销售截单额含运费
-  var M13_SOLD_COST_1122 = 47328.50;  // 截单表135个可比商品 Σ(进价×数量)
+  var M13_SOLD_COST_1122 = 46856.50;  // 截单表135个可比商品 Σ(进价×数量)
   var M13_FIXED_1122 = 98144.00;      // 上月固定成本（与模块14同源）
   function updateM13(){
     var f=document.getElementById('m13DailyFormula'), v=document.getElementById('m13DailyValue'), r=document.getElementById('m13ResultDaily');
