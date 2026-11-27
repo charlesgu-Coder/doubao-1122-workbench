@@ -1,12 +1,12 @@
 {
-    "updatedAt": "2026-11-27 16:02",
-    "main":  "运行中 · 6 worker 闭环",
+    "updatedAt":  "2026-11-27 16:02",
+    "main":  "运行中 · 4 worker 闭环",
     "capNote":  "框架最多同时跑 5 路（实测），按 8 / 6 / 4 人阶段分批",
     "currentTask":  {
                         "taskName":  "S2校验→解析→克隆→归档清空→真值回填→硬闸→打包",
                         "stageLabel":  "发布打包",
                         "percent":  100,
-                        "note":  "6 worker 共用同一条流水线，按阶段边界刷新"
+                        "note":  "4 worker 共用同一条流水线，按阶段边界刷新"
                     },
     "assistants":  [
                        {
@@ -15,7 +15,7 @@
                            "doing":  "待规则固化后进入主流程，管采购/收款/欠款核算",
                            "percent":  100,
                            "elapsedSec":  9,
-                           "lastUpdate":  "2026-11-27 15:55",
+                           "lastUpdate":  "2026-11-27 16:03",
                            "health":  "normal",
                            "healthNote":  "跟上共用进度，近期有更新"
                        },
@@ -25,7 +25,7 @@
                            "doing":  "待命；6人阶段做深度核算交叉验证，4人阶段做硬闸/搜索法复核",
                            "percent":  100,
                            "elapsedSec":  9,
-                           "lastUpdate":  "2026-11-27 15:55",
+                           "lastUpdate":  "2026-11-27 16:03",
                            "health":  "normal",
                            "healthNote":  "跟上共用进度，近期有更新"
                        },
@@ -35,7 +35,7 @@
                            "doing":  "待命；4人阶段去 GitHub 找更优思路并做看板 UI 优化",
                            "percent":  100,
                            "elapsedSec":  9,
-                           "lastUpdate":  "2026-11-27 15:55",
+                           "lastUpdate":  "2026-11-27 16:03",
                            "health":  "normal",
                            "healthNote":  "跟上共用进度，近期有更新"
                        },
@@ -45,7 +45,7 @@
                            "doing":  "主流程固定岗，4/6/8 人阶段均在主流程",
                            "percent":  100,
                            "elapsedSec":  9,
-                           "lastUpdate":  "2026-11-27 15:55",
+                           "lastUpdate":  "2026-11-27 16:03",
                            "health":  "normal",
                            "healthNote":  "跟上共用进度，近期有更新"
                        },
@@ -55,7 +55,7 @@
                            "doing":  "主流程固定岗，盯排队顺序和阶段切换",
                            "percent":  100,
                            "elapsedSec":  9,
-                           "lastUpdate":  "2026-11-27 15:55",
+                           "lastUpdate":  "2026-11-27 16:03",
                            "health":  "normal",
                            "healthNote":  "跟上共用进度，近期有更新"
                        },
@@ -65,7 +65,7 @@
                            "doing":  "待命；各阶段独立算法复核，沉淀 SOP/工作清单与易错库",
                            "percent":  100,
                            "elapsedSec":  9,
-                           "lastUpdate":  "2026-11-27 15:55",
+                           "lastUpdate":  "2026-11-27 16:03",
                            "health":  "normal",
                            "healthNote":  "跟上共用进度，近期有更新"
                        },
@@ -75,7 +75,7 @@
                            "doing":  "主流程固定岗，负责数据解析",
                            "percent":  100,
                            "elapsedSec":  9,
-                           "lastUpdate":  "2026-11-27 15:55",
+                           "lastUpdate":  "2026-11-27 16:03",
                            "health":  "normal",
                            "healthNote":  "跟上共用进度，近期有更新"
                        },
@@ -85,7 +85,7 @@
                            "doing":  "主流程固定岗，负责心跳维护与云端同步",
                            "percent":  100,
                            "elapsedSec":  9,
-                           "lastUpdate":  "2026-11-27 15:55",
+                           "lastUpdate":  "2026-11-27 16:03",
                            "health":  "normal",
                            "healthNote":  "跟上共用进度，近期有更新"
                        }
