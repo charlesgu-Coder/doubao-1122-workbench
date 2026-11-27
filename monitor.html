@@ -49,6 +49,25 @@
   .a .s.run{background:#0bbf6b}.a .s.wait{background:#b9c4bd}
   .a .n{font-size:14px;font-weight:700}
   .a .d{font-size:12px;color:#5a6b60;margin-top:1px}
+  /* 健康徽章 / 个人分片进度 */
+  .badge.h-normal{background:#e3f6ec;color:#07a35a}
+  .badge.h-lagging{background:#fdf3e0;color:#b97a09}
+  .badge.h-stalled{background:#fdf3e0;color:#b97a09}
+  .badge.h-stuck{background:#fbe7e7;color:#c0392b}
+  .a .body{flex:1 1 auto;min-width:0}
+  .nrow{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+  .mini{height:7px;border-radius:4px;background:#eef1ef;margin:6px 0 4px;overflow:hidden}
+  .mini-fill{height:100%;border-radius:4px;background:linear-gradient(90deg,#07a35a,#0bbf6b)}
+  .mini-fill.warn{background:linear-gradient(90deg,#e8a33d,#f5b94c)}
+  .mini-fill.bad{background:linear-gradient(90deg,#c0392b,#e06b5f)}
+  .meta{font-size:12px;color:#5a6b60}
+  .anote{font-size:11px;color:#8a978f;margin-top:2px}
+  /* 顶部健康汇总提示 */
+  .alert-in{padding:11px 16px;border-left:4px solid #c0392b;background:#fbeeee}
+  .alert-in.warn{border-left-color:#e8a33d;background:#fdf6e9}
+  .alert-text{font-size:13px;font-weight:700;color:#c0392b}
+  .alert-in.warn .alert-text{color:#b97a09}
+  .alert-sub{font-size:11px;color:#8a978f;margin-top:2px}
 
   /* 空闲去向 */
   .stage{padding:11px 16px;border-top:1px solid #eef1ef}
@@ -81,6 +100,13 @@
       <div class="hd live" id="hd"><span class="dot"></span><span class="t" id="main">连接中…</span><span class="u" id="upd"></span></div>
     </div>
 
+    <div class="card alert" id="alertCard" style="display:none">
+      <div class="alert-in" id="alertIn">
+        <div class="alert-text" id="alertText"></div>
+        <div class="alert-sub" id="alertSub"></div>
+      </div>
+    </div>
+
     <div class="card block1">
       <div class="sec-t">一、当前任务进度（8 人共用一条）</div>
       <div class="pbar-wrap">
@@ -110,6 +136,22 @@
 // 心跳超过这个分钟数没更新，就判定为“已停止/等待心跳”
 var STALE_MINUTES = 6;
 var STAGE_ORDER = ['8人阶段', '6人阶段', '4人阶段'];
+
+var HEALTH_MAP = {
+  normal:  {label:"正常",     cls:"h-normal", fill:""},
+  lagging: {label:"落后",     cls:"h-lagging", fill:"warn"},
+  stalled: {label:"进度停滞", cls:"h-stalled", fill:"warn"},
+  stuck:   {label:"疑似卡住", cls:"h-stuck",   fill:"bad"}
+};
+function fmtElapsed(sec){
+  sec=Math.max(0,Math.floor(Number(sec)||0));
+  var m=Math.floor(sec/60), s=sec%60;
+  return String(m).padStart(2,"0")+":"+String(s).padStart(2,"0");
+}
+function minuteOf(str){
+  var m=String(str||"").trim().match(/(\d{2}:\d{2})/);
+  return m?m[1]:"--:--";
+}
 
 function esc(s){return String(s==null?"":s).replace(/[&<>]/g,function(c){return{"&":"&amp;","<":"&lt;","&gt;":"&gt;"}[c];});}
 
