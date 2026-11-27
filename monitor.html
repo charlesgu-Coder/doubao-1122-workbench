@@ -9,11 +9,14 @@
   body{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','Microsoft YaHei',sans-serif;background:#f2f5f3;color:#1c2b22;min-height:100vh}
   .wrap{display:grid;gap:12px;padding:calc(10px + env(safe-area-inset-top)) 10px 20px;grid-template-columns:1fr;max-width:560px;margin:0 auto}
   .card{background:#fff;border-radius:14px;box-shadow:0 2px 10px rgba(0,0,0,.06);overflow:hidden}
-  .hd{display:flex;align-items:center;gap:10px;padding:13px 16px;background:linear-gradient(90deg,#07a35a,#0bbf6b);color:#fff}
-  .dot{width:11px;height:11px;border-radius:50%;background:#fff;flex:0 0 auto;animation:pulse 1.1s infinite}
+  .hd{display:flex;align-items:center;gap:10px;padding:13px 16px;color:#fff}
+  .hd.live{background:linear-gradient(90deg,#07a35a,#0bbf6b)}
+  .hd.stale{background:linear-gradient(90deg,#8a948d,#a7b1aa)}
+  .dot{width:11px;height:11px;border-radius:50%;background:#fff;flex:0 0 auto}
+  .hd.live .dot{animation:pulse 1.1s infinite}
   @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(255,255,255,.7)}70%{box-shadow:0 0 0 8px rgba(255,255,255,0)}100%{box-shadow:0 0 0 0 rgba(255,255,255,0)}}
   .hd .t{font-size:15px;font-weight:700;flex:1 1 auto}
-  .hd .u{font-size:12px;opacity:.92;flex:0 0 auto}
+  .hd .u{font-size:12px;opacity:.92;flex:0 0 auto;text-align:right}
   .sec-t{padding:13px 16px 6px;font-size:13px;font-weight:800;color:#07a35a}
   .a{display:flex;align-items:flex-start;gap:10px;padding:10px 16px;border-top:1px solid #eef1ef}
   .a .s{width:9px;height:9px;border-radius:50%;margin-top:5px;flex:0 0 auto}
@@ -39,7 +42,7 @@
 <body>
   <div class="wrap">
     <div class="card top">
-      <div class="hd"><span class="dot"></span><span class="t" id="main">连接中…</span><span class="u" id="upd"></span></div>
+      <div class="hd live" id="hd"><span class="dot"></span><span class="t" id="main">连接中…</span><span class="u" id="upd"></span></div>
     </div>
     <div class="card">
       <div class="sec-t">助理在干嘛</div>
@@ -52,24 +55,62 @@
     </div>
   </div>
 <script>
-function esc(s){return String(s==null?"":s).replace(/[&<>]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;"}[c];});}
+// 心跳超过这个分钟数没更新，就判定为“已停止/等待心跳”
+var STALE_MINUTES = 6;
+
+function esc(s){return String(s==null?"":s).replace(/[&<>]/g,function(c){return{"&":"&amp;","<":"&lt;","&gt;":"&gt;"}[c];});}
+
+// 解析 "yyyy-MM-dd HH:mm" 为浏览器本地时间
+function parseLocal(str){
+  if(!str) return null;
+  var m=String(str).trim().match(/^(\d{4})-(\d{2})-(\d{2})[ T](\d{2}):(\d{2})/);
+  if(!m) return null;
+  return new Date(+m[1],+m[2]-1,+m[3],+m[4],+m[5],0);
+}
+
+function ageText(min){
+  if(min < 1) return "刚刚";
+  if(min < 60) return Math.floor(min)+" 分钟前";
+  var h=Math.floor(min/60), mm=Math.floor(min%60);
+  return h+" 小时 "+mm+" 分钟前";
+}
+
+function setStatus(alive, mainText, updateText){
+  var hd=document.getElementById("hd");
+  hd.className = alive ? "hd live" : "hd stale";
+  document.getElementById("main").textContent = mainText;
+  document.getElementById("upd").textContent = updateText;
+}
+
 function load(){
   fetch("monitor.json?t="+Date.now(),{cache:"no-store"})
     .then(function(r){return r.json();})
     .then(function(d){
-      document.getElementById("main").textContent=d.main;
-      document.getElementById("upd").textContent=d.updatedAt;
+      var t=parseLocal(d.updatedAt);
+      var now=new Date();
+      var ageMin=t ? (now-t)/60000 : Infinity;
+
+      if(!t || ageMin > STALE_MINUTES){
+        // 心跳落后：明确标成已停止，不再显示“运行中”
+        setStatus(false, "已停止 · 等待心跳", t ? ("最后更新 "+d.updatedAt+"（"+ageText(ageMin)+"）") : "未读到更新时间");
+      } else {
+        setStatus(true, d.main || "运行中", "最后更新 "+d.updatedAt+"（"+ageText(ageMin)+"）");
+      }
+
       document.getElementById("cap").textContent=d.capNote||"";
       var ah="";
-      d.assistants.forEach(function(a){
+      (d.assistants||[]).forEach(function(a){
         var cls=(a.status==="运行"||a.status==="运行中")?"run":"wait";
         ah+="<div class='a'><span class='s "+cls+"'></span><div><div class='n'>"+esc(a.name)+" · "+esc(a.status)+"</div><div class='d'>"+esc(a.doing)+"</div></div></div>";
       });
       document.getElementById("assistants").innerHTML=ah;
       var qh="";
-      d.queue.forEach(function(x){qh+="<li>"+esc(x)+"</li>";});
+      (d.queue||[]).forEach(function(x){qh+="<li>"+esc(x)+"</li>";});
       document.getElementById("queue").innerHTML=qh;
-    }).catch(function(){document.getElementById("main").textContent="等待数据（后台运行中）";});
+    })
+    .catch(function(){
+      setStatus(false, "等待心跳（连不上数据）", "");
+    });
 }
 load();setInterval(load,20000);
 </script>
