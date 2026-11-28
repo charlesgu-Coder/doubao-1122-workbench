@@ -30,8 +30,8 @@
       "md5": "dfb0507e6b5c18c6863740d9dac5c6ab"
     },
     "monitor.html": {
-      "bytes": 13133,
-      "md5": "b8d7211fd5ff4ff63c5a47227528eacd"
+      "bytes": 13906,
+      "md5": "73bdc4f0eb33856f3902d412dfe48b25"
     },
     "monitor.html.bak-20261127-1415": {
       "bytes": 5126,
@@ -45,9 +45,13 @@
       "bytes": 9514,
       "md5": "a31fe0f9acb1fe8e566c718ae16acbef"
     },
+    "monitor.html.bak_加固前_20261128": {
+      "bytes": 13133,
+      "md5": "b8d7211fd5ff4ff63c5a47227528eacd"
+    },
     "monitor.json": {
-      "bytes": 6005,
-      "md5": "7ce850301fe4e614b97c88337c1294bb"
+      "bytes": 21109,
+      "md5": "3608984f8fe75db5a14b9a9c7710217f"
     },
     "monitor.json.bak-20261127-1415": {
       "bytes": 1338,
@@ -65,6 +69,10 @@
       "bytes": 4899,
       "md5": "462455de3edf1a2a7109c9c27659cc99"
     },
+    "monitor.json.bak_加固前_20261128": {
+      "bytes": 6005,
+      "md5": "b83e06ff22ea9d30411bb80686f96bb2"
+    },
     "monitor.prev.json": {
       "bytes": 4825,
       "md5": "b0614b4f39cb146b62234f432d84cb09"
@@ -76,10 +84,6 @@
     "progress.json": {
       "bytes": 2745,
       "md5": "1ed04d7b91cde38ffb21de1b06ff4770"
-    },
-    "发布清单.json": {
-      "bytes": 4039,
-      "md5": "78ae2341bd023b4db2ce02099c150300"
     },
     "吴丹_镜像.html": {
       "bytes": 2920791,
