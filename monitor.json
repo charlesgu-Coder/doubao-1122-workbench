@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-28 09:52",
+  "updatedAt": "2026-11-28 09:57",
   "main": "运行中 · 8 worker 闭环",
   "capNote": "框架最多同时跑 5 路（实测），按 8 / 6 / 4 人阶段分批",
   "currentTask": {
@@ -156,56 +156,10 @@
   ],
   "redAlert": {
     "level": "红灯",
-    "time": "2026-11-28T09:51:06+08:00",
+    "time": "2026-11-28T09:57:01+08:00",
     "overall": "FAIL",
     "responsibility": "主控",
     "items": [],
-    "failed_checks": [
-      {
-        "id": "C1",
-        "name": "开工必读核验",
-        "status": "FAIL"
-      },
-      {
-        "id": "C3",
-        "name": "硬闸结果核验",
-        "status": "FAIL"
-      },
-      {
-        "id": "C4",
-        "name": "外网同步核验",
-        "status": "FAIL"
-      },
-      {
-        "id": "C6",
-        "name": "写操作审计核验",
-        "status": "FAIL"
-      },
-      {
-        "id": "C7",
-        "name": "看板推送核验",
-        "status": "FAIL"
-      },
-      {
-        "id": "C9",
-        "name": "交付物停滞熔断",
-        "status": "FAIL"
-      },
-      {
-        "id": "C10",
-        "name": "主控承诺核验",
-        "status": "FAIL"
-      },
-      {
-        "id": "C13",
-        "name": "召回凭证闸核验",
-        "status": "FAIL"
-      },
-      {
-        "id": "C16",
-        "name": "镜像唯一凭证核验",
-        "status": "FAIL"
-      }
-    ]
+    "failed_checks": []
   }
 }
