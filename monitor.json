@@ -192,7 +192,7 @@
   },
   "redAlert": {
     "level": "红灯",
-    "time": "2026-11-28T13:41:04+08:00",
+    "time": "2026-11-28T13:47:03+08:00",
     "overall": "FAIL",
     "responsibility": "主控",
     "items": [
@@ -387,6 +387,11 @@
       }
     ],
     "failed_checks": [
+      {
+        "id": "C11",
+        "name": "调度池核验",
+        "status": "FAIL"
+      },
       {
         "id": "C16",
         "name": "凭证核验·业务表与商家群同等证据",
