@@ -42,7 +42,7 @@
   .badge.off{background:#eef1ef;color:#6b7770}
   .qstep{font-size:12px;color:#5a6b60;margin-top:2px}
 
-  /* 助理列表 */
+  /* worker 列表 */
   .a{display:flex;align-items:flex-start;gap:10px;padding:10px 16px;border-top:1px solid #eef1ef}
   .a .num{width:20px;height:20px;border-radius:50%;background:#07a35a;color:#fff;font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center;flex:0 0 auto;margin-top:1px}
   .a .s{width:9px;height:9px;border-radius:50%;margin-top:5px;flex:0 0 auto}
@@ -108,7 +108,7 @@
     </div>
 
     <div class="card block1">
-      <div class="sec-t">一、当前任务进度（8 人共用一条）</div>
+      <div class="sec-t">一、当前任务进度（8 worker 共用一条）</div>
       <div class="pbar-wrap">
         <div class="pbar-top"><span class="pbar-label" id="ptask"></span><span class="pbar-pct" id="pct"></span></div>
         <div class="pbar"><div class="pbar-fill" id="pfill"></div></div>
@@ -117,13 +117,13 @@
     </div>
 
     <div class="card block2">
-      <div class="sec-t">二、8 个助理在干嘛</div>
-      <div id="assistants"></div>
+      <div class="sec-t">二、8 个 worker 在干嘛</div>
+      <div id="workers"></div>
       <div class="note" id="cap"></div>
     </div>
 
     <div class="card block3">
-      <div class="sec-t">各阶段空闲助理去向</div>
+      <div class="sec-t">各阶段空闲 worker 去向</div>
       <div id="idle"></div>
     </div>
 
@@ -131,11 +131,16 @@
       <div class="sec-t">三、谁在排队</div>
       <div id="queue"></div>
     </div>
+
+    <div class="card block5">
+      <div class="sec-t">四、watchdog 待修项</div>
+      <div id="watchdog"></div>
+    </div>
   </div>
 <script>
 // 心跳超过这个分钟数没更新，就判定为“已停止/等待心跳”
 var STALE_MINUTES = 6;
-var STAGE_ORDER = ['8人阶段', '6人阶段', '4人阶段'];
+var STAGE_ORDER = ['8worker阶段', '6worker阶段', '4worker阶段'];
 
 var HEALTH_MAP = {
   normal:  {label:"正常",     cls:"h-normal", fill:""},
@@ -205,11 +210,11 @@ function renderAlert(unhealthy){
     return esc(x.name)+" "+hp.label;
   });
   document.getElementById("alertText").textContent="需关注："+parts.join("；");
-  document.getElementById("alertSub").textContent="演示数据，正式跑由闭环脚本按前后快照实时刷新判定";
+  document.getElementById("alertSub").textContent="面板由闭环脚本按 monitor_state.json 实时刷新，页面每 20 秒自动拉取"
   card.style.display="";
 }
 
-function renderAssistants(list){
+function renderWorkers(list){
   var h="", unhealthy=[];
   (list||[]).forEach(function(a,i){
     var hp=HEALTH_MAP[a.health]||HEALTH_MAP.normal;
@@ -224,7 +229,7 @@ function renderAssistants(list){
       +(a.healthNote?'<div class="anote">'+esc(a.healthNote)+'</div>':'')
       +'<div class="d">'+esc(a.doing)+'</div></div></div>';
   });
-  document.getElementById("assistants").innerHTML=h;
+  document.getElementById("workers").innerHTML=h;
   renderAlert(unhealthy);
 }
 
@@ -251,6 +256,19 @@ function renderIdle(idle){
   document.getElementById("idle").innerHTML=h;
 }
 
+function renderWatchdog(items){
+  var h="";
+  (items||[]).forEach(function(x){
+    var fail=(x.status==="FAIL");
+    var badge='<span class="badge '+(fail?"":"on")+'">'+esc(x.status||"")+'</span>';
+    h+='<div class="qitem"><span class="qnum">'+esc(x.id)+'</span><div class="qbody">'
+      +'<div class="qtop"><span class="qtitle">'+esc(x.name)+'</span>'+badge
+      +'<span class="meta">责任 '+esc(x.ownerWorker||"主控")+'</span></div>'
+      +'<div class="qstep">'+esc(x.detail||"")+'</div></div></div>';
+  });
+  document.getElementById("watchdog").innerHTML=h;
+}
+
 function load(){
   fetch("monitor.json?t="+Date.now(),{cache:"no-store"})
     .then(function(r){return r.json();})
@@ -267,9 +285,10 @@ function load(){
 
       document.getElementById("cap").textContent=d.capNote||"";
       renderCurrentTask(d.currentTask);
-      renderAssistants(d.assistants);
+      renderWorkers(d.workers);
       renderIdle(d.idle);
       renderQueue(d.queue);
+      renderWatchdog(d.watchdog && d.watchdog.items);
     })
     .catch(function(){
       setStatus(false, "等待心跳（连不上数据）", "");
