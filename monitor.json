@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-28 12:47",
+  "updatedAt": "2026-11-28 12:52",
   "main": "加固中 · 8 worker 闭环",
   "capNote": "8 worker 共用同一条流水线，按阶段边界刷新；框架最多同时跑 5 路（实测），按 8/6/4 分批；池槽位以 pool_state.json 为准。",
   "currentTask": {
@@ -226,7 +226,7 @@
   },
   "redAlert": {
     "level": "红灯",
-    "time": "2026-11-28T12:47:22+08:00",
+    "time": "2026-11-28T12:51:40+08:00",
     "overall": "FAIL",
     "responsibility": "主控",
     "items": [],
