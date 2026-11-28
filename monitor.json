@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-28 13:02",
+  "updatedAt": "2026-11-28 13:07",
   "main": "加固中 · 8 worker 闭环",
   "capNote": "8 worker 共用同一条流水线，按阶段边界刷新；框架最多同时跑 5 路（实测），按 8/6/4 分批；池槽位以 pool_state.json 为准。",
   "currentTask": {
@@ -226,7 +226,7 @@
   },
   "redAlert": {
     "level": "红灯",
-    "time": "2026-11-28T13:01:01+08:00",
+    "time": "2026-11-28T13:07:44+08:00",
     "overall": "FAIL",
     "responsibility": "主控",
     "items": [
@@ -399,6 +399,37 @@
         "reason": "承诺到期未兑现：文件缺失或为空"
       }
     ],
-    "failed_checks": []
+    "failed_checks": [
+      {
+        "id": "C1",
+        "name": "开工必读核验",
+        "status": "FAIL"
+      },
+      {
+        "id": "C4",
+        "name": "外网同步核验",
+        "status": "FAIL"
+      },
+      {
+        "id": "C6",
+        "name": "写操作审计核验",
+        "status": "FAIL"
+      },
+      {
+        "id": "C7",
+        "name": "看板推送核验",
+        "status": "FAIL"
+      },
+      {
+        "id": "C9",
+        "name": "交付物停滞熔断",
+        "status": "FAIL"
+      },
+      {
+        "id": "C10",
+        "name": "主控承诺核验",
+        "status": "FAIL"
+      }
+    ]
   }
 }
