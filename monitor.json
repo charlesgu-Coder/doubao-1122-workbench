@@ -156,7 +156,7 @@
   ],
   "redAlert": {
     "level": "红灯",
-    "time": "2026-11-28T12:07:42+08:00",
+    "time": "2026-11-28T12:11:25+08:00",
     "overall": "FAIL",
     "responsibility": "主控",
     "items": [],
@@ -184,11 +184,6 @@
       {
         "id": "C7",
         "name": "看板推送核验",
-        "status": "FAIL"
-      },
-      {
-        "id": "C9",
-        "name": "交付物停滞熔断",
         "status": "FAIL"
       },
       {
