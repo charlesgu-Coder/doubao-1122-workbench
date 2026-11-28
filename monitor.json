@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-28 12:42",
+  "updatedAt": "2026-11-28 12:47",
   "main": "加固中 · 8 worker 闭环",
   "capNote": "8 worker 共用同一条流水线，按阶段边界刷新；框架最多同时跑 5 路（实测），按 8/6/4 分批；池槽位以 pool_state.json 为准。",
   "currentTask": {
@@ -15,7 +15,7 @@
       "doing": "加固采购/收款/欠款核算口径；按产物契约保护复核回填与取证文件，防误删（根因层4）",
       "percent": 30,
       "elapsedSec": 0,
-      "lastUpdate": "2026-11-28 12:41",
+      "lastUpdate": "2026-11-28 12:43",
       "health": "normal",
       "healthNote": "待命，待加固范围派发"
     },
@@ -25,7 +25,7 @@
       "doing": "独立复算成本/利润/欠款并交叉验证；配合基线/审计漂移加固（C1/C6）",
       "percent": 30,
       "elapsedSec": 0,
-      "lastUpdate": "2026-11-28 12:41",
+      "lastUpdate": "2026-11-28 12:43",
       "health": "normal",
       "healthNote": "待命，待加固范围派发"
     },
@@ -35,7 +35,7 @@
       "doing": "GitHub 选型落地（trakr/safefile/yamale vendor）与看板 UI 加固",
       "percent": 35,
       "elapsedSec": 0,
-      "lastUpdate": "2026-11-28 12:41",
+      "lastUpdate": "2026-11-28 12:43",
       "health": "normal",
       "healthNote": "选型报告已出，vendor 实施待派"
     },
@@ -45,7 +45,7 @@
       "doing": "脚本幂等/可重入/原子写加固（根因层3）：终态检测 + 临时文件 + os.replace",
       "percent": 30,
       "elapsedSec": 0,
-      "lastUpdate": "2026-11-28 12:41",
+      "lastUpdate": "2026-11-28 12:43",
       "health": "normal",
       "healthNote": "待命，待加固范围派发"
     },
@@ -55,7 +55,7 @@
       "doing": "盯排队顺序与阶段切换；新工作走 worker_pool 落 pool_state，watchdog 自动核验",
       "percent": 50,
       "elapsedSec": 0,
-      "lastUpdate": "2026-11-28 12:41",
+      "lastUpdate": "2026-11-28 12:43",
       "health": "normal",
       "healthNote": "本批统筹在跑"
     },
@@ -65,7 +65,7 @@
       "doing": "独立算法复核 + 易错经验/SOP/工作清单沉淀（根因层2 经验固化）",
       "percent": 30,
       "elapsedSec": 0,
-      "lastUpdate": "2026-11-28 12:41",
+      "lastUpdate": "2026-11-28 12:43",
       "health": "normal",
       "healthNote": "待命，待加固范围派发"
     },
@@ -75,7 +75,7 @@
       "doing": "解析对账与凭证回填；本批交付：监控面板刷新机制 + C7/C9 停工态补丁规格",
       "percent": 60,
       "elapsedSec": 0,
-      "lastUpdate": "2026-11-28 12:41",
+      "lastUpdate": "2026-11-28 12:43",
       "health": "normal",
       "healthNote": "本批面板与节奏补丁在做"
     },
@@ -85,7 +85,7 @@
       "doing": "心跳维护、外网/云端同步与发布包一致性核验（配合 C4 配置陈旧治理）",
       "percent": 30,
       "elapsedSec": 0,
-      "lastUpdate": "2026-11-28 12:41",
+      "lastUpdate": "2026-11-28 12:43",
       "health": "normal",
       "healthNote": "待命，待加固范围派发"
     }
@@ -226,74 +226,10 @@
   },
   "redAlert": {
     "level": "红灯",
-    "time": "2026-11-28T12:35:18+08:00",
+    "time": "2026-11-28T12:47:22+08:00",
     "overall": "FAIL",
     "responsibility": "主控",
-    "items": [
-      {
-        "id": "C1",
-        "name": "开工必读核验",
-        "status": "FAIL",
-        "ownerWorker": "W2",
-        "detail": "统筹技能 SKILL.md 登记哈希与实测不一致（根因层2 基线漂移）"
-      },
-      {
-        "id": "C3",
-        "name": "硬闸结果核验",
-        "status": "FAIL",
-        "ownerWorker": "W4",
-        "detail": "硬闸退出码 1，具体原因待定位（根因层4 产物契约）"
-      },
-      {
-        "id": "C4",
-        "name": "外网同步核验",
-        "status": "FAIL",
-        "ownerWorker": "W8",
-        "detail": "成本/利润新值外网缺失；归档旧值 956 仍残留（根因层5 配置陈旧）"
-      },
-      {
-        "id": "C6",
-        "name": "写操作审计核验",
-        "status": "FAIL",
-        "ownerWorker": "W2",
-        "detail": "10 条改后哈希与实测不一致（根因层2 审计漂移）"
-      },
-      {
-        "id": "C7",
-        "name": "看板推送核验",
-        "status": "FAIL",
-        "ownerWorker": "W7",
-        "detail": "停工态误报；本批补丁修正：停工态（无运行标记/存在等待标记）跳过判 PASS，执行中才按 360 秒阈值判"
-      },
-      {
-        "id": "C9",
-        "name": "交付物停滞熔断",
-        "status": "FAIL",
-        "ownerWorker": "W7",
-        "detail": "停工态误报；本批补丁修正：停工态跳过判 PASS，执行中才按 180 秒阈值 + 等待标记豁免判"
-      },
-      {
-        "id": "C10",
-        "name": "主控承诺核验",
-        "status": "FAIL",
-        "ownerWorker": "W5",
-        "detail": "承诺台账死线时间无法解析、缺承诺产出文件路径（根因层5 时间格式规范）"
-      },
-      {
-        "id": "C13",
-        "name": "召回凭证闸核验",
-        "status": "FAIL",
-        "ownerWorker": "W4",
-        "detail": "测试坏凭证 `_坏凭证_测试.json` 被当真凭证（根因层5 测试夹具隔离）"
-      },
-      {
-        "id": "C16",
-        "name": "凭证核验·业务表与商家群同等证据",
-        "status": "FAIL",
-        "ownerWorker": "W1",
-        "detail": "搜索法取证_1123.json 未生成；镜像取证已通过（根因层4 产物契约缺失）"
-      }
-    ],
+    "items": [],
     "failed_checks": [
       {
         "id": "C1",
@@ -328,16 +264,6 @@
       {
         "id": "C10",
         "name": "主控承诺核验",
-        "status": "FAIL"
-      },
-      {
-        "id": "C13",
-        "name": "召回凭证闸核验",
-        "status": "FAIL"
-      },
-      {
-        "id": "C16",
-        "name": "凭证核验·业务表与商家群同等证据",
         "status": "FAIL"
       }
     ]
